@@ -137,8 +137,8 @@
 
 					<div class="col-md-8 col-sm-offset-2">
 						<div class="text-center m-b-70">
-							<h5>[about-text-header]</h5>
-							<p class="lead">[about-text]</p>
+							<h5 data-txt="about.text-header">[about.text-header]</h5>
+							<p class="lead" data-txt="about.text">[about.text]</p>
                         </div>
 					</div>
 
@@ -149,31 +149,93 @@
 		</section>
 		<!-- /ABOUT -->
 
-		<!-- RESUME -->
-		<section id="resume" class="module module-g">
-			<div class="container">
+        <!-- RESUME -->
+        <section id="resume" class="module module-g">
+            <div class="container">
 
-				<div class="row">
+                <div class="row">
 
-					<!-- RESUME COLUMN -->
-					<div class="col-sm-4" data-txt="resume.awards">
-                        [resume.awards]
-					</div>
-					<!-- /RESUME COLUMN -->
+                    <!-- RESUME COLUMN -->
+                    <div class="col-sm-4">
+                        <div class="profile wow fadeInUp">
+                            <div class="profile-icon">
+                                <span class="icon icon-Cup"></span>
+                            </div>
+                            <h3 class="profile-title" data-txt="resume.col1-title">[resume.col1-title]</h3>
+                            <hr class="divider divider-gross m-b-30">
 
-					<!-- RESUME COLUMN -->
-					<div class="col-sm-4" data-txt="resume.experience">
-					    [resume.experience]
-					</div>
-					<!-- /RESUME COLUMN -->
+                            <div data-txt="resume.col1-content">
+                                [resume.col1-content]
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /RESUME COLUMN -->
 
-					<!-- RESUME COLUMN -->
-					<div class="col-sm-4" data-txt="resume.development-skills">
-                        [resume.development-skills]
-					</div>
-					<!-- /RESUME COLUMN -->
+                    <!-- RESUME COLUMN -->
+                    <div class="col-sm-4">
+                        <div class="profile wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="profile-icon">
+                                <span class="icon icon-Tie"></span>
+                            </div>
+                            <h3 class="profile-title" data-txt="resume.col2-title">[resume.col2-title]</h3>
+                            <hr class="divider divider-gross m-b-30">
 
-				</div>
+                            <div data-txt="resume.col2-content">
+                                [resume.col2-content]
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /RESUME COLUMN -->
+
+                    <!-- RESUME COLUMN -->
+                    <div class="col-sm-4">
+                        <div class="profile">
+                            <div class="profile-icon">
+                                <span class="icon icon-Medal"></span>
+                            </div>
+                            <h3 class="profile-title" data-txt="resume.col3-title">[resume.col3-title]</h3>
+                            <hr class="divider divider-gross m-b-30">
+
+                            <h6 class="progress-title">.NET / C#</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-def" aria-valuenow="95" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                    <span><span class="progress-value"></span>%</span>
+                                </div>
+                            </div>
+
+                            <h6 class="progress-title">SQL</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-def" aria-valuenow="90" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                    <span><span class="progress-value"></span>%</span>
+                                </div>
+                            </div>
+
+                            <h6 class="progress-title">Xamarin</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-def" aria-valuenow="80" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                    <span><span class="progress-value"></span>%</span>
+                                </div>
+                            </div>
+
+                            <h6 class="progress-title">Javascript</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-def" aria-valuenow="75" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                    <span><span class="progress-value"></span>%</span>
+                                </div>
+                            </div>
+
+                            <h6 class="progress-title">Hybrid Mobile Development</h6>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-def" aria-valuenow="75" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                    <span><span class="progress-value"></span>%</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /RESUME COLUMN -->
+
+                </div>
 
                 <!-- BUTTON -->
                 <div class="row">
@@ -187,126 +249,9 @@
                 </div>
                 <!-- /BUTTON -->
 
-			</div>
-		</section>
-		<!-- /RESUME -->
-
-		<!-- SERVICES -->
-		<section id="services" class="module module-w">
-			<div class="container">
-
-				<!-- MODULE TITLE -->
-				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2 wow fadeInUp">
-						<h2 class="module-title" data-txt="services.title">[services.title]</h2>
-						<h3 class="module-subtitle" data-txt="services.subtitle">[services.subtitle]</h3>
-					</div>
-				</div>
-				<!-- /MODULE TITLE -->
-
-				<div class="row multi-columns-row">
-
-					<!-- ICONBOX -->
-					<div class="col-sm-3">
-						<div class="iconbox wow fadeInUp">
-							<div class="iconbox-icon">
-								<span class="icon icon-ClipboardText"></span>
-							</div>
-							<h6 class="iconbox-title">Well documented</h6>
-							<p>His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.</p>
-						</div>
-					</div>
-					<!-- /ICONBOX -->
-
-					<!-- ICONBOX -->
-					<div class="col-sm-3">
-						<div class="iconbox wow fadeInUp" data-wow-delay="0.1s">
-							<div class="iconbox-icon">
-								<span class="icon icon-Bulb"></span>
-							</div>
-							<h6 class="iconbox-title">Modern code</h6>
-							<p>His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.</p>
-						</div>
-					</div>
-					<!-- /ICONBOX -->
-
-					<!-- ICONBOX -->
-					<div class="col-sm-3">
-						<div class="iconbox wow fadeInUp" data-wow-delay="0.2s">
-							<div class="iconbox-icon">
-								<span class="icon icon-DownloadCloud"></span>
-							</div>
-							<h6 class="iconbox-title">Free updates</h6>
-							<p>His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.</p>
-						</div>
-					</div>
-					<!-- /ICONBOX -->
-
-					<!-- ICONBOX -->
-					<div class="col-sm-3">
-						<div class="iconbox wow fadeInUp" data-wow-delay="0.3s">
-							<div class="iconbox-icon">
-								<span class="icon icon-Phone"></span>
-							</div>
-							<h6 class="iconbox-title">Responsive design</h6>
-							<p>His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.</p>
-						</div>
-					</div>
-					<!-- /ICONBOX -->
-
-					<!-- ICONBOX -->
-					<div class="col-sm-3">
-						<div class="iconbox wow fadeInUp" data-wow-delay="0.4s">
-							<div class="iconbox-icon">
-								<span class="icon icon-Layers"></span>
-							</div>
-							<h6 class="iconbox-title">Modular layout</h6>
-							<p>His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.</p>
-						</div>
-					</div>
-					<!-- /ICONBOX -->
-
-					<!-- ICONBOX -->
-					<div class="col-sm-3">
-						<div class="iconbox wow fadeInUp" data-wow-delay="0.5s">
-							<div class="iconbox-icon">
-								<span class="icon icon-Like"></span>
-							</div>
-							<h6 class="iconbox-title">Color schemes</h6>
-							<p>His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.</p>
-						</div>
-					</div>
-					<!-- /ICONBOX -->
-
-					<!-- ICONBOX -->
-					<div class="col-sm-3">
-						<div class="iconbox wow fadeInUp" data-wow-delay="0.6s">
-							<div class="iconbox-icon">
-								<span class="icon icon-Share"></span>
-							</div>
-							<h6 class="iconbox-title">Free support</h6>
-							<p>His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.</p>
-						</div>
-					</div>
-					<!-- /ICONBOX -->
-
-					<!-- ICONBOX -->
-					<div class="col-sm-3">
-						<div class="iconbox wow fadeInUp" data-wow-delay="0.7s">
-							<div class="iconbox-icon">
-								<span class="icon icon-Starship"></span>
-							</div>
-							<h6 class="iconbox-title">SEO optimized</h6>
-							<p>His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked.</p>
-						</div>
-					</div>
-					<!-- /ICONBOX -->
-
-				</div>
-
-			</div>
-		</section>
-		<!-- /SERVICES -->
+            </div>
+        </section>
+        <!-- /RESUME -->
 
 		<!-- WORK PROCESS -->
 		<section class="module module-w">
@@ -315,8 +260,8 @@
 				<!-- MODULE TITLE -->
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2 wow fadeInUp">
-						<h2 class="module-title">[work-process-title-</h2>
-						<h3 class="module-subtitle">work-process-subtitle]</h3>
+						<h2 class="module-title" data-txt="workprocess.title">[workprocess.title]</h2>
+						<h3 class="module-subtitle" data-txt="workprocess.subtitle">[workprocess.subtitle]</h3>
 					</div>
 				</div>
 				<!-- /MODULE TITLE -->
