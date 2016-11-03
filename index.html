@@ -96,9 +96,9 @@
 			<!-- HERO TEXT -->
 			<div class="hero-caption">
 				<div class="hero-text">
-					<h1 class="hero-title m-t-70">[title]</h1>
-					<p class="lead m-t-40 m-b-60">[subtitle]</p>
-					<a href="#profile" class="section-scroll"><button type="submit" class="btn btn-round btn-dark">Learn More</button></a>
+					<h1 class="hero-title m-t-70" data-txt="header.title">[header.title]</h1>
+					<p class="lead m-t-40 m-b-60" data-txt="header.subtitle">[header.subtitle]</p>
+					<a href="#profile" class="section-scroll"><button type="submit" class="btn btn-round btn-dark" data-txt="header.btn-text">[header-btn-text]</button></a>
 				</div>
 			</div>
 			<!-- /HERO TEXT -->
@@ -113,8 +113,8 @@
 				<!-- MODULE TITLE -->
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2 wow fadeInUp">
-						<h2 class="module-title">Software Developer Based in Charlotte, NC</h2>
-						<h3 class="module-subtitle">I attended Clemson University, graduating with a Bachelors of Science with a major in Management Information Systems. I have experience in web application and mobile development in the Healthcare and Oil and Gas industries.</h3>
+						<h2 class="module-title" data-txt="about.title">[about.title]</h2>
+						<h3 class="module-subtitle" data-txt="about.subtitle">[about.subtitle]</h3>
 					</div>
 				</div>
 				<!-- /MODULE TITLE -->
@@ -124,7 +124,7 @@
 
 					<div class="col-md-4 col-md-offset-4">
 						<div class="text-center m-b-70">
-							<img src="assets/images/matt-headshot.png" class="img-circle" alt="">
+							<img src="assets/images/matt-headshot.png" class="img-circle" alt="Headshot">
 						</div>
 					</div>
 
@@ -136,9 +136,8 @@
 
 					<div class="col-md-8 col-sm-offset-2">
 						<div class="text-center m-b-70">
-							<h5>Hello. I'm Matt Stewart.</h5>
-							<p class="lead">When I'm not working on a development project or learning a new technology I can be found exploring the great outdoors with my wife Emily and two dogs. You can read about our family adventures on our
-                                <a href="http://www.tentstrailsandcocktails.com/">travel blog</a>.</p>
+							<h5>[about-text-header]</h5>
+							<p class="lead">[about-text]</p>
                         </div>
 					</div>
 
@@ -156,104 +155,20 @@
 				<div class="row">
 
 					<!-- RESUME COLUMN -->
-					<div class="col-sm-4">
-						<div class="profile wow fadeInUp">
-							<div class="profile-icon">
-								<span class="icon icon-Cup"></span>
-							</div>
-							<h3 class="profile-title">Awards</h3>
-							<hr class="divider divider-gross m-b-30">
-
-							<div class="profile-content">
-								<h6>Applied Technology Center Student of the Year</h6>
-								<p>Overall Student Award</p>
-							</div>
-                            <div class="profile-content">
-                                <h6>Applied Technology Center Drafting Student of the Year</h6>
-                                <p>Drafting & Design</p>
-                            </div>
-							<div class="profile-content">
-								<h6>Carolina's Outstanding Graduate</h6>
-								<p>Applied Technology Center - Rock Hill, SC</p>
-							</div>
-						</div>
+					<div class="col-sm-4" data-txt="resume.awards">
+                        [resume.awards]
 					</div>
 					<!-- /RESUME COLUMN -->
 
 					<!-- RESUME COLUMN -->
-					<div class="col-sm-4">
-						<div class="profile wow fadeInUp" data-wow-delay="0.2s">
-							<div class="profile-icon">
-								<span class="icon icon-Tie"></span>
-							</div>
-							<h3 class="profile-title">Experience</h3>
-							<hr class="divider divider-gross m-b-30">
-
-							<div class="profile-content">
-								<h6>Co-Founder & CTO</h6>
-								<p>Verimoov, LLC</p>
-							</div>
-							<div class="profile-content">
-								<h6>Lead Application Developer</h6>
-								<p>Healthstat, Inc.</p>
-							</div>
-							<div class="profile-content">
-								<h6>Application Support Specialist</h6>
-								<p>Applied Engineering Solutions</p>
-							</div>
-                            <div class="profile-content">
-                                <h6>Systems Analyst</h6>
-                                <p>LivingWell Health Solutions</p>
-                            </div>
-						</div>
+					<div class="col-sm-4" data-txt="resume.experience">
+					    [resume.experience]
 					</div>
 					<!-- /RESUME COLUMN -->
 
 					<!-- RESUME COLUMN -->
-					<div class="col-sm-4">
-						<div class="profile">
-							<div class="profile-icon">
-								<span class="icon icon-Medal"></span>
-							</div>
-							<h3 class="profile-title">Development Skills</h3>
-							<hr class="divider divider-gross m-b-30">
-
-							<h6 class="progress-title">.NET / C#</h6>
-							<div class="progress">
-								<div class="progress-bar progress-bar-def" aria-valuenow="95" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-									<span><span class="progress-value"></span>%</span>
-								</div>
-							</div>
-
-                            <h6 class="progress-title">SQL</h6>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-def" aria-valuenow="90" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                                    <span><span class="progress-value"></span>%</span>
-                                </div>
-                            </div>
-
-                            <h6 class="progress-title">Xamarin</h6>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-def" aria-valuenow="80" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                                    <span><span class="progress-value"></span>%</span>
-                                </div>
-                            </div>
-
-							<h6 class="progress-title">Javascript</h6>
-							<div class="progress">
-								<div class="progress-bar progress-bar-def" aria-valuenow="75" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-									<span><span class="progress-value"></span>%</span>
-								</div>
-							</div>
-
-							<h6 class="progress-title">Hybrid Mobile Development</h6>
-							<div class="progress">
-								<div class="progress-bar progress-bar-def" aria-valuenow="75" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-									<span><span class="progress-value"></span>%</span>
-								</div>
-							</div>
-
-						</div>
+					<div class="col-sm-4" data-txt="resume.development-skills">
+                        [resume.development-skills]
 					</div>
 					<!-- /RESUME COLUMN -->
 
@@ -264,7 +179,7 @@
 
                     <div class="col-sm-12">
                         <div class="text-center">
-                            <a href="#" class="btn btn-circle btn-def wow tada">Download Resume</a>
+                            <a href="#" class="btn btn-circle btn-def wow tada" data-txt="resume.btn-text">[resume.btn-text]</a>
                         </div>
                     </div>
 
@@ -275,238 +190,6 @@
 		</section>
 		<!-- /RESUME -->
 
-		<!-- PORTFOLIO -->
-		<section id="portfolio" class="module module-w p-b-0">
-			<div class="container">
-
-				<!-- MODULE TITLE -->
-				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2 wow fadeInUp">
-						<h2 class="module-title">Creative Portfolio Showcase</h2>
-						<h3 class="module-subtitle">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of decided to leave.</h3>
-					</div>
-				</div>
-				<!-- /MODULE TITLE -->
-
-				<!-- PORTFOLIO FILTER -->
-				<div class="row">
-					<div class="col-sm-12">
-						<ul id="filters" class="filters">
-							<li><a href="#" class="current" data-filter="*">All</a></li>
-							<li><span>&frasl;</span> <a href="#" data-filter=".branding">Web</a></li>
-							<li><span>&frasl;</span> <a href="#" data-filter=".design">Mobile</a></li>g
-						</ul>
-					</div>
-				</div>
-				<!-- /PORTFOLIO FILTER -->
-
-			</div>
-
-			<div class="works-grid-wrapper">
-				<div id="works-grid" class="works-grid works-grid-gutter works-grid-dark">
-
-					<!-- PORTFOLIO ITEM -->
-					<article class="work-item design video">
-						<div class="work-wrapper">
-							<div class="work-thumbnail">
-								<img src="assets/images/portfolio-1.jpg" alt="">
-							</div>
-							<div class="work-caption">
-								<h3 class="work-title">The Ultimate Renters Guide</h3>
-								<h6 class="work-category"><a href="#">Video</a></h6>
-							</div>
-							<a href="portfolio-single-1.html" class="work-link"></a>
-							<a class="work-popup video-popup" href="https://www.youtube.com/watch?v=4OdmZL4gDXM"><i class="fa fa-expand"></i></a>
-						</div>
-					</article>
-					<!-- /PORTFOLIO ITEM -->
-
-					<!-- PORTFOLIO ITEM -->
-					<article class="work-item branding">
-						<div class="work-wrapper">
-							<div class="work-thumbnail">
-								<img src="assets/images/portfolio-2.jpg" alt="">
-							</div>
-							<div class="work-caption">
-								<h3 class="work-title">Living Big in Tiny Houses</h3>
-								<h6 class="work-category"><a href="#">Video</a></h6>
-							</div>
-							<a href="portfolio-single-1.html" class="work-link"></a>
-							<a class="work-popup image-popup" href="assets/images/portfolio-2.jpg"><i class="fa fa-expand"></i></a>
-						</div>
-					</article>
-					<!-- /PORTFOLIO ITEM -->
-
-					<!-- PORTFOLIO ITEM -->
-					<article class="work-item photo">
-						<div class="work-wrapper">
-							<div class="work-thumbnail">
-								<img src="assets/images/portfolio-3.jpg" alt="">
-							</div>
-							<div class="work-caption">
-								<h3 class="work-title">How to Hang a Gallery Wall</h3>
-								<h6 class="work-category"><a href="#">Video</a></h6>
-							</div>
-							<a href="portfolio-single-1.html" class="work-link"></a>
-							<a class="work-popup image-popup" href="assets/images/portfolio-3.jpg"><i class="fa fa-expand"></i></a>
-						</div>
-					</article>
-					<!-- /PORTFOLIO ITEM -->
-
-					<!-- PORTFOLIO ITEM -->
-					<article class="work-item branding">
-						<div class="work-wrapper">
-							<div class="work-thumbnail">
-								<img src="assets/images/portfolio-4.jpg" alt="">
-							</div>
-							<div class="work-caption">
-								<h3 class="work-title">60 Beautiful Kitchen Island Ideas</h3>
-								<h6 class="work-category"><a href="#">Video</a></h6>
-							</div>
-							<a href="portfolio-single-1.html" class="work-link"></a>
-							<a class="work-popup image-popup" href="assets/images/portfolio-4.jpg"><i class="fa fa-expand"></i></a>
-						</div>
-					</article>
-					<!-- /PORTFOLIO ITEM -->
-
-					<!-- PORTFOLIO ITEM -->
-					<article class="work-item design">
-						<div class="work-wrapper">
-							<div class="work-thumbnail">
-								<img src="assets/images/portfolio-5.jpg" alt="">
-							</div>
-							<div class="work-caption">
-								<h3 class="work-title">25 Essential Home Products</h3>
-								<h6 class="work-category"><a href="#">Video</a></h6>
-							</div>
-							<a href="portfolio-single-1.html" class="work-link"></a>
-							<a class="work-popup image-popup" href="assets/images/portfolio-5.jpg"><i class="fa fa-expand"></i></a>
-						</div>
-					</article>
-					<!-- /PORTFOLIO ITEM -->
-
-					<!-- PORTFOLIO ITEM -->
-					<article class="work-item photo">
-						<div class="work-wrapper">
-							<div class="work-thumbnail">
-								<img src="assets/images/portfolio-6.jpg" alt="">
-							</div>
-							<div class="work-caption">
-								<h3 class="work-title">Fresh Finds: Brighton Wine Holder</h3>
-								<h6 class="work-category"><a href="#">Video</a></h6>
-							</div>
-							<a href="portfolio-single-1.html" class="work-link"></a>
-							<a class="work-popup image-popup" href="assets/images/portfolio-6.jpg"><i class="fa fa-expand"></i></a>
-						</div>
-					</article>
-					<!-- /PORTFOLIO ITEM -->
-
-					<!-- PORTFOLIO ITEM -->
-					<article class="work-item desing">
-						<div class="work-wrapper">
-							<div class="work-thumbnail">
-								<img src="assets/images/portfolio-7.jpg" alt="">
-							</div>
-							<div class="work-caption">
-								<h3 class="work-title">How to Hang a Gallery Wall</h3>
-								<h6 class="work-category"><a href="#">Video</a></h6>
-							</div>
-							<a href="portfolio-single-1.html" class="work-link"></a>
-							<a class="work-popup image-popup" href="assets/images/portfolio-7.jpg"><i class="fa fa-expand"></i></a>
-						</div>
-					</article>
-					<!-- /PORTFOLIO ITEM -->
-
-					<!-- PORTFOLIO ITEM -->
-					<article class="work-item branding">
-						<div class="work-wrapper">
-							<div class="work-thumbnail">
-								<img src="assets/images/portfolio-8.jpg" alt="">
-							</div>
-							<div class="work-caption">
-								<h3 class="work-title">Living Big in Tiny Houses</h3>
-								<h6 class="work-category"><a href="#">Video</a></h6>
-							</div>
-							<a href="portfolio-single-1.html" class="work-link"></a>
-							<a class="work-popup image-popup" href="assets/images/portfolio-8.jpg"><i class="fa fa-expand"></i></a>
-						</div>
-					</article>
-					<!-- /PORTFOLIO ITEM -->
-
-				</div>
-			</div>
-
-		</section>
-		<!-- /PORTFOLIO -->
-
-		<!-- COUNTERS -->
-		<section id="counters" class="module module-overlay-dark-1" data-background="assets/images/canoesunset.jpg">
-			<div class="container">
-
-				<div class="row">
-
-					<!-- COUNTER -->
-					<div class="col-sm-3">
-						<div class="counter">
-							<div class="counter-icon">
-								<span class="icon icon-Cup"></span>
-							</div>
-							<div class="counter-content">
-								<h2><span class="counter-timer" data-from="0" data-to="124">0</span></h2>
-								<h6 class="counter-text">Awards Won</h6>
-							</div>
-						</div>
-					</div>
-					<!-- /COUNTER -->
-
-					<!-- COUNTER -->
-					<div class="col-sm-3">
-						<div class="counter">
-							<div class="counter-icon">
-								<span class="icon icon-Like"></span>
-							</div>
-							<div class="counter-content">
-								<h2><span class="counter-timer" data-from="0" data-to="4024">0</span></h2>
-								<h6 class="counter-text">Happy Customers</h6>
-							</div>
-						</div>
-					</div>
-					<!-- /COUNTER -->
-
-					<!-- COUNTER -->
-					<div class="col-sm-3">
-						<div class="counter">
-							<div class="counter-icon">
-								<span class="icon icon-Starship"></span>
-							</div>
-							<div class="counter-content">
-								<h2><span class="counter-timer" data-from="0" data-to="14">0</span></h2>
-								<h6 class="counter-text">Projects Done</h6>
-							</div>
-						</div>
-					</div>
-					<!-- /COUNTER -->
-
-					<!-- COUNTER -->
-					<div class="col-sm-3">
-						<div class="counter">
-							<div class="counter-icon">
-								<span class="icon icon-CompactCamera"></span>
-							</div>
-							<div class="counter-content">
-								<h2><span class="counter-timer" data-from="0" data-to="248">0</span></h2>
-								<h6 class="counter-text">Photos Made</h6>
-							</div>
-						</div>
-					</div>
-					<!-- /COUNTER -->
-
-				</div>
-
-			</div>
-		</section>
-		<!-- /COUNTERS -->
-
 		<!-- SERVICES -->
 		<section id="services" class="module module-w">
 			<div class="container">
@@ -514,8 +197,8 @@
 				<!-- MODULE TITLE -->
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2 wow fadeInUp">
-						<h2 class="module-title">Smart Digital Solutions</h2>
-						<h3 class="module-subtitle">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of decided to leave.</h3>
+						<h2 class="module-title" data-txt="services.title">[services.title]</h2>
+						<h3 class="module-subtitle" data-txt="services.subtitle">[services.subtitle]</h3>
 					</div>
 				</div>
 				<!-- /MODULE TITLE -->
@@ -631,8 +314,8 @@
 				<!-- MODULE TITLE -->
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2 wow fadeInUp">
-						<h2 class="module-title">Four Simple Steps</h2>
-						<h3 class="module-subtitle">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of decided to leave.</h3>
+						<h2 class="module-title">[work-process-title-</h2>
+						<h3 class="module-subtitle">work-process-subtitle]</h3>
 					</div>
 				</div>
 				<!-- /MODULE TITLE -->
@@ -710,8 +393,8 @@
 				<!-- MODULE TITLE -->
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2 wow fadeInUp">
-						<h2 class="module-title">Let's talk</h2>
-						<h3 class="module-subtitle">I'm always looking for the next amazing project to work on. If you would like to discuss a project or just want to chat you can reach me by filling out the form below.</h3>
+						<h2 class="module-title" data-txt="contact.title">[contact-title]</h2>
+						<h3 class="module-subtitle" data-txt="contact.subtitle">[contact-subtitle]</h3>
 					</div>
 				</div>
 				<!-- /MODULE TITLE -->
@@ -771,8 +454,8 @@
 				</div>
 	
 				<div class="col-sm-12">
-					<div class="copyright text-center">
-						© 2016 <a href="#">mattstewart.io</a>, All Rights Reserved.
+					<div class="copyright text-center" data-txt="footer.copyright-text">
+						[footer.copyright-text]
 					</div>
 				</div>
 	
@@ -799,8 +482,6 @@
 	<script src="assets/js/owl.carousel.min.js"></script>
 	<script src="assets/js/jquery.fitvids.js"></script>
 	<script src="assets/js/jqBootstrapValidation.js"></script>
-	<script src="//maps.google.com/maps/api/js?key=AIzaSyBuaKMZsa9zvRZoV0c4MyFRQ7SAnIw03AI&sensor=true"></script>
-	<script src="assets/js/gmap3.min.js"></script>
 	<script src="assets/js/appear.js"></script>
 	<script src="assets/js/wow.min.js"></script>
 	<script src="assets/js/smoothscroll.js"></script>
