@@ -348,3 +348,9 @@ blockquote footer {
 .pull-right {
     float: right;
 }
+
+.form-element {
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
