@@ -1,80 +1,248 @@
-<!-- MVP.css quickstart template: https://github.com/andybrewer/mvp/ -->
-
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <link rel="icon" href="./assets/images/favicon.png">
-    <link rel="stylesheet" href="./assets/css/mvp.css">
-
-    <meta charset="utf-8">
-    <meta name="description" content="My description">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
     <title>Matt Stewart</title>
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Matt Stewart" />
+    <meta name="keywords" content="matt, stewart" />
+    <meta name="author" content="Matt Stewart" />
+    <link rel="shortcut icon" href="images/favicon.png">
 
-<body>
-    <header>
-        <nav>
-            <a href="/"><img src="./assets/images/matt-stewart-logo-black.png" height="80"></a>
-            <ul>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="https://blog.mattstewart.io">Blog</a></li>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/transition-animations.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/modernizr.custom.js"></script>
+  </head>
+
+  <body>
+    <!-- Loading animation -->
+    <div class="preloader">
+      <div class="preloader-animation">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+      </div>
+    </div>
+    <!-- /Loading animation -->
+
+    <div id="page" class="page">
+      <!-- Header -->
+      <header id="site_header" class="header">
+        <div class="my-photo">
+          <img src="images/profile-photo.png" alt="Profile Photo">
+          <div class="mask"></div>
+        </div>
+
+        <div class="site-title-block">
+          <h1 class="site-title">Matt Stewart</h1>
+          <p class="site-description">Regional Support Manager, Auth0</p>
+        </div>
+
+        <a class="menu-toggle mobile-visible">
+          <i class="fa fa-bars"></i>
+        </a>
+      </header>
+      <!-- /Header -->
+
+      <!-- Main Content -->
+      <div id="main" class="site-main">
+        <!-- Page changer wrapper -->
+        <div class="pt-wrapper">
+          <!-- Navigation & Social buttons -->
+          <div class="site-nav mobile-menu-hide">
+            <!-- Main menu -->
+            <ul id="nav" class="site-main-menu">
+              <!-- About Me Subpage link -->
+              <li>
+                <a class="pt-trigger" href="#about_me" data-animation="58" data-goto="1">About me</a><!-- href value = data-id without # of .pt-page -->
+              </li>
+              <!-- /Contact Subpage link -->
+              <li>
+                <a class="pt-trigger" href="#contact" data-animation="59" data-goto="2">Contact</a>
+              </li>
             </ul>
-        </nav>
-        <img src="./assets/images/undraw_active_support_6rwo.png" height="200">
-        <h1>Regional Support Manager at <u><a href="https://auth0.com/">Auth0</a></u>.</h1>
-        <p>Working remotely from <mark>Anchorage, AK</mark>.</p>
-        <br>
-        <p><a href="https://calendly.com/matt-stew/30min"><b>Schedule a Call &rarr;</b></a></p>
-    </header>
-    <main>
-        <hr>
-        <section>
-            <header>
-                <h2>Find Me Around the Web</h2>
-            </header>
-            <aside>
-                <img src="./assets/images/undraw_resume_1hqp.png" height="150">
-                <p><a href="https://share.mattstewart.io/MattStewartResume.pdf">View Resume</a></p>
-            </aside>
-            <aside>
-                <img src="./assets/images/undraw_code_review_l1q9.png" height="150">
-                <p><a href="https://github.com/mattstewart">View GitHub</a></p>
-            </aside>
-            <aside>
-                <img src="./assets/images/undraw_online_cv_qy9w.png" height="150">
-                <p><a href="https://www.linkedin.com/in/mattstewart01/">View LinkedIn</a></p>
-            </aside>
-        </section>
-        <hr>
-        <section>
-            <a name="contact"></a>
-            <header>
-                <h2>Let's Talk</h2>
-            </header>
-            <form name="contact-form" id="contact-form" novalidate="" netlify>
-                <header>
-                    <img src="./assets/images/undraw_video_call_kxyp.png" height="150">
-                </header>
-                <label for="name">Name:</label>
-                <input type="text" class="form-element" id="name" name="name" placeholder="Please enter your name." width="90">
-                <label for="email">Email Address:</label>
-                <input type="text" class="form-element" id="email" name="email" placeholder="Please enter your email address.">
-                <label for="message">What do you want to chat about?</label>
-                <textarea rows="8" class="form-element" id="message" name="message" placeholder="Please enter your message here..."></textarea>
-                <button type="submit">Submit</button>
-            </form>
-        </section>
-    </main>
-    <footer>
-        <hr>
-        <p>
-            &copy; 2020 Matt Stewart
-            <a class="pull-right" href="https://mattstewart.io/findme">Find Me</a>
-        </p>
-    </footer>
-</body>
+            <!-- /Main menu -->
 
+            <!-- Social buttons -->
+            <ul class="social-links">
+              <li><a class="tip social-button" href="https://www.linkedin.com/in/mattstewart01/" title="LinkedIn"><i class="fa fa-linkedin"></i></a></li> <!-- Full list of social icons: http://fontawesome.io/icons/#brand -->
+            </ul>
+            <!-- /Social buttons -->
+          </div>
+          <!-- Navigation & Social buttons -->
+
+          <!-- Subpages -->
+          <div class="subpages">
+
+            <!-- About Me Subpage -->
+            <section class="pt-page pt-page-1" data-id="about_me">
+              <div class="section-title-block">
+                <h2 class="section-title">About Me</h2>
+                <h5 class="section-description">Developer & Adventurer</h5>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-md-4 subpage-block">
+                  <div class="block-title">
+                    <h3>Work Experience</h3>
+                  </div>
+                  <div class="timeline">
+                    <!-- Single event -->
+                    <div class="timeline-event te-primary">
+                      <h5 class="event-date">Jan 2018 - Present</h5>
+                      <h4 class="event-name">Senior Regional Support Manager, Americas</h4>
+                      <span class="event-description">Auth0, Inc. - Seattle, WA (Remote)</span>
+                    </div>
+                    <!-- Single event -->
+                    <div class="timeline-event te-primary">
+                      <h5 class="event-date">Apr 2021 - Present</h5>
+                      <h4 class="event-name">Chairman, Catawba Nation Gaming Commission</h4>
+                      <span class="event-description">Catawba Indian Nation - Rock Hill, SC (Remote)</span>                    
+                    </div>
+                    <!-- Single event -->
+                  </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 subpage-block">
+                  <div class="block-title">
+                    <h3>Education</h3>
+                  </div>
+                  <div class="timeline">
+                    <!-- Single event -->
+                    <div class="timeline-event te-primary">
+                      <h5 class="event-date">2006 - 2010</h5>
+                      <h4 class="event-name">Clemson University - Clemson, SC</h4>
+                      <span class="event-description">Bachelor of Science, Management Information Systems</span>
+                    </div>
+                    <!-- Single event -->
+                    <div class="timeline-event te-primary">
+                      <h5 class="event-date">2004 - 2006</h5>
+                      <h4 class="event-name">Applied Technology Center - Rock Hill, SC</h4>
+                      <span class="event-description">Drafting & Design Student of the Year ‘05</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 subpage-block">
+                  <div class="block-title">
+                    <h3>Community Involvement</h3>
+                  </div>
+                  <div class="timeline">
+                    <!-- Single event -->
+                    <div class="timeline-event te-primary">
+                      <h5 class="event-date">May 2019 – Present</h5>
+                      <h4 class="event-name">Operational Search & Rescue Field Team Member</h4>
+                      <span class="event-description">Alaska Mountain Rescue Group - Anchorage, AK</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-12">
+                  <div class="download-cv-block">
+                    <a class="button" target="_blank" href="https://static.mattstewart.io/files/2020-MattStewart-Resume.pdf">Download Resume</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- About Me Subpage -->
+
+            <!-- Contact Subpage -->
+            <section class="pt-page pt-page-2" data-id="contact">
+              <div class="section-title-block">
+                <h2 class="section-title">Contact</h2>
+                <h5 class="section-description">Get in Touch</h5>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-md-6 subpage-block">
+                  <div class="block-title">
+                    <h3>Get in Touch</h3>
+                  </div>
+                  <p>Hi! I'm a Software Developer and avid adventurer based in Eagle River, AK. I love working on new projects and mostly spend my time working as a Support Manager at <a href="https://auth0.com">Auth0</a> (recently acquired by <a href="https://okta.com">Okta</a>), serving as the Chariman of the Catawba Indian Nation Gaming Commission for the Two Kings Casino Resort in Kings Mountain, NC, and volunteering as a search and rescue team member with the <a href="https://amrg.org/">Alaska Mountain Rescue Group</a>. If you'd like to chat, please fill out the contact form and I will get back to you.</p>
+                  <div class="contact-info-block">
+                    <div class="ci-icon">
+                      <i class="pe-7s-icon pe-7s-map-marker"></i>
+                    </div>
+                    <div class="ci-text">
+                      <h5>Eagle River, AK, USA</h5>
+                    </div>
+                  </div>
+                  <div class="contact-info-block">
+                    <div class="ci-icon">
+                      <i class="pe-7s-icon pe-7s-check"></i>
+                    </div>
+                    <div class="ci-text">
+                      <h5>Open to Networking</h5>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6 col-md-6 subpage-block">
+                  <div class="block-title">
+                    <h3>Contact Form</h3>
+                  </div>
+                  <form id="contact-form" name="contact-form" method="POST" data-netlify="true">
+
+                    <div class="messages"></div>
+
+                    <div class="controls">
+                      <div class="form-group">
+                          <input id="form_name" type="text" name="name" class="form-control" placeholder="Full Name" required="required" data-error="Name is required.">
+                          <div class="form-control-border"></div>
+                          <i class="form-control-icon fa fa-user"></i>
+                          <div class="help-block with-errors"></div>
+                      </div>
+
+                      <div class="form-group">
+                          <input id="form_email" type="email" name="email" class="form-control" placeholder="Email Address" required="required" data-error="Valid email is required.">
+                          <div class="form-control-border"></div>
+                          <i class="form-control-icon fa fa-envelope"></i>
+                          <div class="help-block with-errors"></div>
+                      </div>
+
+                      <div class="form-group">
+                          <textarea id="form_message" name="message" class="form-control" placeholder="Message for me" rows="4" required="required" data-error="Please, leave me a message."></textarea>
+                          <div class="form-control-border"></div>
+                          <i class="form-control-icon fa fa-comment"></i>
+                          <div class="help-block with-errors"></div>
+                      </div>
+
+                      <div data-netlify-recaptcha="true"></div>
+
+                      <input type="submit" class="button btn-send" value="Send message">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </section>
+            <!-- End Contact Subpage -->
+
+          </div>
+        </div>
+        <!-- /Page changer wrapper -->
+      </div>
+      <!-- /Main Content -->
+    </div>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/page-transition.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/validator.js"></script>
+    <script src="js/jquery.shuffle.min.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.hoverdir.js"></script>
+    <script src="js/main.js"></script>
+
+  </body>
 </html>
