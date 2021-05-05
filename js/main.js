@@ -40,26 +40,35 @@
     // Contact form validator
     $(function () {
 
-        var $recaptcha = document.querySelector('#g-recaptcha-response');
-        if ($recaptcha) {
-            $recaptcha.setAttribute("required", "required");
-        }
-
         $('#contact-form').validator();
 
         $('#contact-form').on('submit', function (e) {
             if (!e.isDefaultPrevented()) {
 
-                $.ajax({
-                    type: "POST",
-                    url: "/",
-                    data: $(this).serialize(),
-                    success: function (data) {
-                        var alertBox = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Thank you for reaching out! I\'ll be in touch shortly.</div>';
-                        $('#contact-form').find('.messages').html(alertBox);
-                        $('#contact-form')[0].reset();
+                var $recaptcha = document.querySelector('#g-recaptcha-response');
+                if ($recaptcha) {
+                    var isChecked = $('#g-recaptcha-response').val();
+
+                    if (isChecked == "" || isChecked == undefined || isChecked.length == 0) {
+                        var errorAlert = '<div class="alert alert-error alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Are you sure you\'re not a robot?</div>';
+                        $('#contact-form').find('.messages').html(errorAlert);
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            url: "/",
+                            data: $(this).serialize(),
+                            success: function (data) {
+                                var successAlert = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Thank you for reaching out! I\'ll be in touch shortly.</div>';
+                                $('#contact-form').find('.messages').html(successAlert);
+                                $('#contact-form')[0].reset();
+                            }
+                        });
                     }
-                });
+
+                } else {
+                    var errorAlert = '<div class="alert alert-error alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error submitting form.</div>';
+                        $('#contact-form').find('.messages').html(errorAlert);
+                }
                 return false;
             }
         });
