@@ -50,7 +50,7 @@
                     var isChecked = $('#g-recaptcha-response').val();
 
                     if (isChecked == "" || isChecked == undefined || isChecked.length == 0) {
-                        var errorAlert = '<div class="alert alert-error alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Are you sure you\'re not a robot?</div>';
+                        var errorAlert = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Are you sure you\'re not a robot?</div>';
                         $('#contact-form').find('.messages').html(errorAlert);
                     } else {
                         $.ajax({
@@ -66,7 +66,7 @@
                     }
 
                 } else {
-                    var errorAlert = '<div class="alert alert-error alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error submitting form.</div>';
+                    var errorAlert = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error submitting form.</div>';
                         $('#contact-form').find('.messages').html(errorAlert);
                 }
                 return false;
