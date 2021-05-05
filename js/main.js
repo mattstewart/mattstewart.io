@@ -5,14 +5,14 @@
 * Version: 2.2
 */
 
-(function($) {
-"use strict";
-    
+(function ($) {
+    "use strict";
+
     // Portfolio subpage filters
     function portfolio_init() {
         var portfolio_grid = $('#portfolio_grid'),
             portfolio_filter = $('#portfolio_filters');
-            
+
         if (portfolio_grid) {
 
             portfolio_grid.shuffle({
@@ -30,7 +30,7 @@
                 e.preventDefault();
                 $('#portfolio_filters .filter').parent().removeClass('active');
                 $(this).parent().addClass('active');
-                portfolio_grid.shuffle('shuffle', $(this).attr('data-group') );
+                portfolio_grid.shuffle('shuffle', $(this).attr('data-group'));
             });
 
         }
@@ -39,6 +39,11 @@
 
     // Contact form validator
     $(function () {
+
+        var $recaptcha = document.querySelector('#g-recaptcha-response');
+        if ($recaptcha) {
+            $recaptcha.setAttribute("required", "required");
+        }
 
         $('#contact-form').validator();
 
@@ -49,11 +54,10 @@
                     type: "POST",
                     url: "/",
                     data: $(this).serialize(),
-                    success: function (data)
-                    {
-                        var alertBox = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Success</div>';
+                    success: function (data) {
+                        var alertBox = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Thank you for reaching out! I\'ll be in touch shortly.</div>';
                         $('#contact-form').find('.messages').html(alertBox);
-                        $('#contact-form')[0].reset();                     
+                        $('#contact-form')[0].reset();
                     }
                 });
                 return false;
@@ -72,7 +76,7 @@
     // /Hide Mobile menu
 
 
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         // Initialize Portfolio grid
         var $portfolio_container = $(".portfolio-grid");
@@ -82,10 +86,10 @@
         });
 
         // Portfolio hover effect init
-        $(' #portfolio_grid > figure > a ').each( function() { $(this).hoverdir(); } );
+        $(' #portfolio_grid > figure > a ').each(function () { $(this).hoverdir(); });
 
         // Mobile menu
-        $('.menu-toggle').click(function() { 
+        $('.menu-toggle').click(function () {
             $('.site-nav').toggleClass('mobile-menu-hide');
         });
 
@@ -100,7 +104,7 @@
 
         // Blog grid init
         var $container = $(".blog-masonry");
-        $container.imagesLoaded(function(){
+        $container.imagesLoaded(function () {
             $container.masonry();
         });
 
@@ -123,31 +127,31 @@
             },
 
             iframe: {
-                markup: '<div class="mfp-iframe-scaler">'+
-                        '<div class="mfp-close"></div>'+
-                        '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
-                        '<div class="mfp-title mfp-bottom-iframe-title"></div>'+
-                      '</div>', // HTML markup of popup, `mfp-close` will be replaced by the close button
+                markup: '<div class="mfp-iframe-scaler">' +
+                    '<div class="mfp-close"></div>' +
+                    '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>' +
+                    '<div class="mfp-title mfp-bottom-iframe-title"></div>' +
+                    '</div>', // HTML markup of popup, `mfp-close` will be replaced by the close button
 
                 patterns: {
                     youtube: {
-                      index: 'youtube.com/', // String that detects type of video (in this case YouTube). Simply via url.indexOf(index).
+                        index: 'youtube.com/', // String that detects type of video (in this case YouTube). Simply via url.indexOf(index).
 
-                      id: 'v=', // String that splits URL in a two parts, second part should be %id%
-                      // Or null - full URL will be returned
-                      // Or a function that should return %id%, for example:
-                      // id: function(url) { return 'parsed id'; }
+                        id: 'v=', // String that splits URL in a two parts, second part should be %id%
+                        // Or null - full URL will be returned
+                        // Or a function that should return %id%, for example:
+                        // id: function(url) { return 'parsed id'; }
 
-                      src: '//www.youtube.com/embed/%id%?autoplay=1' // URL that will be set as a source for iframe.
+                        src: '//www.youtube.com/embed/%id%?autoplay=1' // URL that will be set as a source for iframe.
                     },
                     vimeo: {
-                      index: 'vimeo.com/',
-                      id: '/',
-                      src: '//player.vimeo.com/video/%id%?autoplay=1'
+                        index: 'vimeo.com/',
+                        id: '/',
+                        src: '//player.vimeo.com/video/%id%?autoplay=1'
                     },
                     gmaps: {
-                      index: '//maps.google.',
-                      src: '%id%&output=embed'
+                        index: '//maps.google.',
+                        src: '%id%&output=embed'
                     }
                 },
 
@@ -155,23 +159,23 @@
             },
 
             callbacks: {
-                    markupParse: function(template, values, item) {
-                     values.title = item.el.attr('title');
-                    }
-                },
+                markupParse: function (template, values, item) {
+                    values.title = item.el.attr('title');
+                }
+            },
         });
 
 
     });
-    
+
     // Animate page loader
-    $(window).on('load', function() {
+    $(window).on('load', function () {
         $(".preloader").fadeOut("slow");
     });
 
     // Mobile menu hide
-    $(window).on('resize', function() {
-         mobileMenuHide();
+    $(window).on('resize', function () {
+        mobileMenuHide();
     });
 
     // Mobile menu hide on main menu item click
