@@ -1,270 +1,564 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Matt Stewart</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Matt Stewart" />
-    <meta name="keywords" content="matt, stewart" />
-    <meta name="author" content="Matt Stewart" />
-    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="shortcut icon" href="images/favicon.png" />
 
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/transition-animations.css">
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <!-- Preload the opening image so the hero paints as fast as possible. -->
+    <link rel="preload" as="image" href="images/forest.webp" />
 
-    <script src="js/jquery-2.1.3.min.js"></script>
-    <script src="js/modernizr.custom.js"></script>
-    
     <script async defer data-website-id="129cb226-8300-4fde-8fb0-c5d19eb8424c" src="https://analytics.mattstewart.io/umami.js"></script>
+
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html, body {
+        width: 100%;
+        height: 100%;
+        background: #0e1116;
+      }
+
+      body { overflow: hidden; }
+
+      /* Two stacked layers crossfade between photos. */
+      .layer {
+        position: fixed;
+        inset: 0;
+        height: 100dvh;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.6s ease-in-out;
+        will-change: opacity, transform;
+      }
+      .layer.active { opacity: 1; }
+      /* Slow Ken Burns zoom on whichever layer is showing. */
+      .layer.kb { animation: kenburns 12s ease-out both; }
+      @keyframes kenburns {
+        from { transform: scale(1.02); }
+        to   { transform: scale(1.10); }
+      }
+
+      .logo {
+        position: fixed;
+        bottom: clamp(1.5rem, 4vh, 3rem);
+        left: clamp(1.5rem, 4vw, 3rem);
+        width: min(240px, 48vw);
+        height: auto;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+        pointer-events: none;
+        user-select: none;
+      }
+      .logo.show { opacity: 1; }
+      /* Shadow tuned to each logo colour for legibility on any photo. */
+      .logo.light { filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.55)); }
+      .logo.dark  { filter: drop-shadow(0 1px 10px rgba(255, 255, 255, 0.6)); }
+
+      @media (prefers-reduced-motion: reduce) {
+        .layer { transition: opacity 0.6s ease; }
+        .layer.kb { animation: none; transform: none; }
+      }
+    </style>
   </head>
 
   <body>
-    <!-- Loading animation -->
-    <div class="preloader">
-      <div class="preloader-animation">
-        <div class="dot1"></div>
-        <div class="dot2"></div>
-      </div>
-    </div>
-    <!-- /Loading animation -->
+    <div class="layer" id="layerA"></div>
+    <div class="layer" id="layerB"></div>
+    <img class="logo" id="logo" src="images/matt-stewart-logo-light.png" alt="Matt Stewart" />
 
-    <div id="page" class="page">
-      <!-- Header -->
-      <header id="site_header" class="header">
-        <div class="my-photo">
-          <img src="images/profile-photo.png" alt="Profile Photo">
-          <div class="mask"></div>
-        </div>
+    <script>
+      // Precomputed per photo: `logo` is chosen from the measured brightness
+      // of the bottom-left corner where the signature sits.
+      var SLIDES = [
+        { src: "images/forest.webp",     logo: "light" },
+        { src: "images/snowfield.webp",  logo: "dark"  },
+        { src: "images/milkyway.webp",   logo: "light" },
+        { src: "images/peak.webp",       logo: "light" },
+        { src: "images/clouds.webp",     logo: "light" },
+        { src: "images/mistforest.webp", logo: "light" },
+        { src: "images/twilight.webp",   logo: "light" }
+      ];
 
-        <div class="site-title-block">
-          <h1 class="site-title">Matt Stewart</h1>
-          <p class="site-description">Regional Support Manager, Auth0</p>
-        </div>
+      var HOLD_MS = 9000; // time each photo is held before crossfading
 
-        <a class="menu-toggle mobile-visible">
-          <i class="fa fa-bars"></i>
-        </a>
-      </header>
-      <!-- /Header -->
+      // Play order: keep the hero (index 0) first so the preloaded image paints
+      // immediately, then shuffle the rest so repeat visits feel fresh.
+      var order = SLIDES.map(function (_, k) { return k; });
+      for (var a = order.length - 1; a >= 2; a--) {
+        var b = 1 + Math.floor(Math.random() * a); // 1..a
+        var t = order[a]; order[a] = order[b]; order[b] = t;
+      }
 
-      <!-- Main Content -->
-      <div id="main" class="site-main">
-        <!-- Page changer wrapper -->
-        <div class="pt-wrapper">
-          <!-- Navigation & Social buttons -->
-          <div class="site-nav mobile-menu-hide">
-            <!-- Main menu -->
-            <ul id="nav" class="site-main-menu">
-              <!-- About Me Subpage link -->
-              <li>
-                <a class="pt-trigger" href="#about_me" data-animation="58" data-goto="1">About me</a><!-- href value = data-id without # of .pt-page -->
-              </li>
-              <!-- /Contact Subpage link -->
-              <li>
-                <a class="pt-trigger" href="#contact" data-animation="59" data-goto="2">Contact</a>
-              </li>
-            </ul>
-            <!-- /Main menu -->
+      var layers = [document.getElementById("layerA"), document.getElementById("layerB")];
+      var logoEl = document.getElementById("logo");
+      var front = 0;   // index into `layers` of the currently visible layer
+      var pos = 0;     // index into `order`
+      var timer = null;
 
-            <!-- Social buttons -->
-            <ul class="social-links">
-              <li><a class="tip social-button" href="https://www.linkedin.com/in/mattstewart01/" title="LinkedIn"><i class="fa fa-linkedin"></i></a></li> <!-- Full list of social icons: http://fontawesome.io/icons/#brand -->
-            </ul>
-            <!-- /Social buttons -->
-          </div>
-          <!-- Navigation & Social buttons -->
+      var LIGHT_SRC = "images/matt-stewart-logo-light.png";
+      var DARK_SRC = "images/matt-stewart-logo-black.png";
 
-          <!-- Subpages -->
-          <div class="subpages">
+      function preload(src) { var im = new Image(); im.src = src; }
 
-            <!-- About Me Subpage -->
-            <section class="pt-page pt-page-1" data-id="about_me">
-              <div class="section-title-block">
-                <h2 class="section-title">About Me</h2>
-                <h5 class="section-description">Developer & Adventurer</h5>
-              </div>
+      function setLogo(kind) {
+        logoEl.classList.remove("show"); // fade out, then swap + fade in
+        setTimeout(function () {
+          logoEl.src = kind === "dark" ? DARK_SRC : LIGHT_SRC;
+          logoEl.classList.remove("light", "dark");
+          logoEl.classList.add(kind, "show");
+        }, 400);
+      }
 
-              <div class="row">
-                <div class="col-sm-12 col-md-12 mobile-visible subpage-block">
-                  <div class="my-photo-small">
-                    <img src="images/circle-cropped.png" alt="profile photo">
-                  </div>
-                </div>
-                <div class="col-sm-12 col-md-12 subpage-block">
-                  <div class="general-info">
-                    <h3>Hello, I'm Matt.</h3>
-                    <p>I'm a Software Developer and avid adventurer based in Eagle River, AK. I love working on new projects and mostly spend my time working as a Support Manager at <a href="https://auth0.com">Auth0</a> (recently acquired by <a href="https://okta.com">Okta</a>), serving as the Chariman of the Catawba Indian Nation Gaming Commission for the Two Kings Casino Resort in Kings Mountain, NC, and volunteering as a search and rescue team member with the <a href="https://amrg.org/">Alaska Mountain Rescue Group</a>.</p>
-                  </div>
-                </div>
-              </div>
+      function show(slideIndex) {
+        var slide = SLIDES[slideIndex];
+        var incoming = layers[front ^ 1];
+        var outgoing = layers[front];
 
-              <div class="row">
-                <div class="col-sm-6 col-md-4 subpage-block">
-                  <div class="block-title">
-                    <h3>Work Experience</h3>
-                  </div>
-                  <div class="timeline">
-                    <!-- Single event -->
-                    <div class="timeline-event te-primary">
-                      <h5 class="event-date">January 2018 - Present</h5>
-                      <h4 class="event-name">Director, Support Strategy & Digital Enablement</h4>
-                      <span class="event-description">Okta, Inc. - San Francisco, CA (Remote)</span>
-                    </div>
-                    <!-- Single event -->
-                    <div class="timeline-event te-primary">
-                      <h5 class="event-date">April 2021 - Present</h5>
-                      <h4 class="event-name">Chairman, Catawba Nation Gaming Commission</h4>
-                      <span class="event-description">Catawba Indian Nation - Rock Hill, SC (Remote)</span>                    
-                    </div>
-                    <!-- Single event -->
-                    <div class="timeline-event te-primary">
-                      <h5 class="event-date">December 2021 - Present</h5>
-                      <h4 class="event-name">Chairman, Catawba Nation Tribal Alcoholic Beverage Control Commission
-</h4>
-                      <span class="event-description">Catawba Indian Nation - Rock Hill, SC (Remote)</span>                    
-                    </div>
-                  </div>
-                </div>
+        incoming.style.backgroundImage = "url(" + slide.src + ")";
+        incoming.classList.remove("kb");
+        void incoming.offsetWidth; // restart the Ken Burns animation
+        incoming.classList.add("kb", "active");
+        outgoing.classList.remove("active");
+        front ^= 1;
 
-                <div class="col-sm-6 col-md-4 subpage-block">
-                  <div class="block-title">
-                    <h3>Education</h3>
-                  </div>
-                  <div class="timeline">
-                    <!-- Single event -->
-                    <div class="timeline-event te-primary">
-                      <h5 class="event-date">2006 - 2010</h5>
-                      <h4 class="event-name">Clemson University - Clemson, SC</h4>
-                      <span class="event-description">Bachelor of Science, Management Information Systems</span>
-                    </div>
-                    <!-- Single event -->
-                    <div class="timeline-event te-primary">
-                      <h5 class="event-date">2004 - 2006</h5>
-                      <h4 class="event-name">Applied Technology Center - Rock Hill, SC</h4>
-                      <span class="event-description">Drafting & Design Student of the Year ‘05</span>
-                    </div>
-                  </div>
-                </div>
+        setLogo(slide.logo);
+        preload(SLIDES[order[(pos + 1) % order.length]].src);
+      }
 
-                <div class="col-sm-6 col-md-4 subpage-block">
-                  <div class="block-title">
-                    <h3>Community Involvement</h3>
-                  </div>
-                  <div class="timeline">
-                    <!-- Single event -->
-                    <div class="timeline-event te-primary">
-                      <h5 class="event-date">May 2019 – Present</h5>
-                      <h4 class="event-name">Operational Search & Rescue Field Team Member</h4>
-                      <span class="event-description">Alaska Mountain Rescue Group - Anchorage, AK</span>
-                    </div>
-                  </div>
-                </div>
+      function scheduleNext() { timer = setTimeout(advance, HOLD_MS); }
+      function advance() {
+        pos = (pos + 1) % order.length;
+        show(order[pos]);
+        scheduleNext();
+      }
 
-              </div>
-              <div class="row">
-                <div class="col-sm-12 col-md-12">
-                  <div class="download-cv-block">
-                    <a class="button" target="_blank" href="https://www.linkedin.com/in/mattstewart01/">View LinkedIn Profile</a>
-                  </div>
-                </div>
-              </div>
-            </section>
-            <!-- About Me Subpage -->
+      // Pause cycling while the tab is hidden; resume when it's visible again.
+      document.addEventListener("visibilitychange", function () {
+        clearTimeout(timer);
+        if (!document.hidden) scheduleNext();
+      });
 
-            <!-- Contact Subpage -->
-            <section class="pt-page pt-page-2" data-id="contact">
-              <div class="section-title-block">
-                <h2 class="section-title">Contact</h2>
-                <h5 class="section-description">Get in Touch</h5>
-              </div>
+      // First paint: show the hero immediately, then start cycling.
+      var first = SLIDES[order[0]];
+      layers[0].style.backgroundImage = "url(" + first.src + ")";
+      layers[0].classList.add("kb", "active");
+      logoEl.className = "logo " + first.logo + " show";
+      preload(SLIDES[order[1]].src);
+      scheduleNext();
+    </script>
 
-              <div class="row">
-                <div class="col-sm-6 col-md-6 subpage-block">
-                  <div class="block-title">
-                    <h3>Get in Touch</h3>
-                  </div>
-                  <p>Hi! If you'd like to chat, please fill out the contact form and I will get back to you.</p>
-                  <div class="contact-info-block">
-                    <div class="ci-icon">
-                      <i class="pe-7s-icon pe-7s-map-marker"></i>
-                    </div>
-                    <div class="ci-text">
-                      <h5>Eagle River, AK, USA</h5>
-                    </div>
-                  </div>
-                  <div class="contact-info-block">
-                    <div class="ci-icon">
-                      <i class="pe-7s-icon pe-7s-check"></i>
-                    </div>
-                    <div class="ci-text">
-                      <h5>Open to Networking</h5>
-                    </div>
-                  </div>
-                </div>
+    <!-- Console Easter egg + hidden game (Konami code) -->
+    <script>
+      (function () {
+        // ---- Console sign-off with a hint at the trick ----
+        try {
+          var art =
+`
+                                     ###
+                                  ##########
+                                 ##%%%########
+                                #%%%##%%%%######
+                                %%%#+++*##%#######
+                                %%#*+++++*%%########
+                                %%#*+**##%%%##########
+                                %%%%%%*+*###%%%###########
+                                 %%%#++**#*+*%%%############
+                                 %%%++#%##*+*%%%%%%##########
+                                   %%+++++++*%%%%%%############
+                                   #%#+++++#%%%%%%###############
+                                  ###%%#++*%%%%%%###################
+                                  ####%%%%%%%%%######################
+                                  #####################################
+                                 #######################################
+                                ####%###################################
+                               ###%%%####%%%#######%%%###################
+                             #####%%%####%%%%%%%####%%%%%#################
+                           ######%%%%%####%%%%%%%%####%%%%%%###############
+                         ########%%%%%%################%%%%%%%%#############
+                      ##########%%%%%%%###################%%%%%% ############
+                    ############%%%%%%%#####################%%%%%%############
+                   +*###########%%%%%  #########################%%%###########
+                 +++*%%#########%       ############################ #########*+++
+                 +++*%#####             ############################# ########+++++
+                 +++*#*++                 ###########################  ######*+++++
+                 +++++++                  ###########################    ***+++++++
+                    ++                   ##########################%%      +++++++
+                                       ##########################%%%
+                                      ########################%%%%%
+                                     ######################%%%%%%##
+                                   ####################%%%%%%%%%###
+                                  #################%%%%%%%%%%%%%###
+                                ###############%%%%%%%%%%%%%%%%%###
+                               ###########%%%%%%%%%%%%%%%%%%%%%%###
+                               ########%%%%%%%%%%%%%%%%%%%%%%%%######
+                               #######%%%%%%%%%%%   %%%%%%%%%%%########
+                               #######%%%%%%%%       %%%%%%%%%%#########
+                               #######%%%%%%%%       %%%%%%%%%%%#########
+                               ######%%%%%%%%%        %%%%%%%%%%##########
+                               #####%%%%%%%%%%           %%%%%%%%##########
+                               #####%%%%%%%%%%              %%%%%##########
+                               ###%%%%%%%%%%%%                %%%%######***++
+                               %%%%%%%%%%%%%%                  %%%######*++++++
+                               %%%%%%%%%%%%%                     ######*+++++++
+                               %%%%%%%%%%%%%                       +++++++++++
+                               %#*#%%%#+**                         ++++++++++
+                             ++++++++++++++                       ++++++++
+                        +++++++++++++++++++                   ++++++++++++
+                    +++++++++++++++++++++++                  ++++++++++++
+                   ++++++++++++++++++++++++                  ++++++++++
+                    +++++++++++       ++`;
+          // place the (fake) Franklin quote to the right of the art
+          var lines = art.split("\n");
+          var quote = [
+            "“When fleeing a Sasquatch,",
+            " one need not be swift —",
+            " merely swifter than the",
+            " friend beside thee.”",
+            "",
+            "        — Benjamin Franklin (probably)"
+          ];
+          var pad = "                                                                                                    ";
+          for (var qi = 0, li = 22; qi < quote.length; qi++, li++) {
+            if (li < lines.length) lines[li] = (lines[li] + pad).slice(0, 90) + "   " + quote[qi];
+          }
+          console.log("%c%s",
+            "color:#b98a63;font-family:monospace;font-size:10px;line-height:1;",
+            lines.join("\n"));
+          console.log(
+            "%cThere's a trail hidden on this page. Want to outrun Bigfoot? Press  %cShift + T",
+            "color:#9aa6c4;font-size:12px;",
+            "color:#f4b183;font-weight:bold;font-size:12px;"
+          );
+        } catch (e) {}
 
-                <div class="col-sm-6 col-md-6 subpage-block">
-                  <div class="block-title">
-                    <h3>Contact Form</h3>
-                  </div>
-                  <form id="contact-form" name="contact-form" data-netlify="true">
+        // ---- Secret shortcut: Shift + T ----
+        var open = false;
 
-                    <div class="messages"></div>
+        document.addEventListener("keydown", function (e) {
+          if (open) return;
+          if (e.shiftKey && (e.key || "").toLowerCase() === "t") {
+            e.preventDefault();
+            startGame();
+          }
+        });
 
-                    <div class="controls">
-                      <div class="form-group">
-                          <input id="form_name" type="text" name="name" class="form-control" placeholder="Full Name" required="required" data-error="Name is required.">
-                          <div class="form-control-border"></div>
-                          <i class="form-control-icon fa fa-user"></i>
-                          <div class="help-block with-errors"></div>
-                      </div>
+        // ---- The game: a themed endless runner ----
+        var W = 900, H = 320, GROUND = 262;
+        var SKY = [
+          [0.00, "#1b2144"], [0.40, "#3a3a6b"], [0.63, "#8a6a8f"],
+          [0.83, "#d98a76"], [1.00, "#f4b183"]
+        ];
+        var stars = [];
+        for (var s = 0; s < 60; s++) {
+          stars.push({ x: Math.random() * W, y: Math.random() * (GROUND - 120), r: Math.random() * 1.3 + 0.3 });
+        }
 
-                      <div class="form-group">
-                          <input id="form_email" type="email" name="email" class="form-control" placeholder="Email Address" required="required" data-error="Valid email is required.">
-                          <div class="form-control-border"></div>
-                          <i class="form-control-icon fa fa-envelope"></i>
-                          <div class="help-block with-errors"></div>
-                      </div>
+        // Bigfoot chaser graphic (SVG). Drawn flipped so it faces the hiker.
+        var bfImg = new Image();
+        bfImg.src = "images/bf.svg";
 
-                      <div class="form-group">
-                          <textarea id="form_message" name="message" class="form-control" placeholder="Message for me" rows="4" required="required" data-error="Please, leave me a message."></textarea>
-                          <div class="form-control-border"></div>
-                          <i class="form-control-icon fa fa-comment"></i>
-                          <div class="help-block with-errors"></div>
-                      </div>
+        var overlay, canvas, ctx, raf, running, dead, frame, deadFrame, score, best, speed, spawnDist;
+        var player, obstacles, hills, chaserX;
 
-                      <div data-netlify-recaptcha="true"></div>
+        function readBest() {
+          try { return parseInt(localStorage.getItem("ms_trail_best") || "0", 10) || 0; }
+          catch (e) { return 0; }
+        }
+        function writeBest(v) { try { localStorage.setItem("ms_trail_best", String(v)); } catch (e) {} }
 
-                      <input type="submit" class="button btn-send" value="Send message">
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </section>
-            <!-- End Contact Subpage -->
+        function startGame() {
+          if (open) return;
+          open = true;
 
-          </div>
-        </div>
-        <!-- /Page changer wrapper -->
-      </div>
-      <!-- /Main Content -->
-    </div>
+          overlay = document.createElement("div");
+          overlay.setAttribute("role", "dialog");
+          overlay.style.cssText =
+            "position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;" +
+            "align-items:center;justify-content:center;gap:14px;" +
+            "background:rgba(10,12,20,0.9);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);" +
+            "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;";
 
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/page-transition.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/validator.js"></script>
-    <script src="js/jquery.shuffle.min.js"></script>
-    <script src="js/masonry.pkgd.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery.hoverdir.js"></script>
-    <script src="js/main.js"></script>
+          var wrap = document.createElement("div");
+          wrap.style.cssText =
+            "position:relative;width:min(920px,92vw);aspect-ratio:900/320;" +
+            "border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.55);" +
+            "outline:1px solid rgba(255,255,255,0.08);";
 
+          canvas = document.createElement("canvas");
+          var dpr = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = W * dpr; canvas.height = H * dpr;
+          canvas.style.cssText = "width:100%;height:100%;display:block;";
+          ctx = canvas.getContext("2d");
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          wrap.appendChild(canvas);
+
+          var hint = document.createElement("div");
+          hint.textContent = "space / tap to jump    ·    esc to leave the trail";
+          hint.style.cssText = "color:#9aa6c4;font-size:13px;letter-spacing:0.02em;";
+
+          overlay.appendChild(wrap);
+          overlay.appendChild(hint);
+          document.body.appendChild(overlay);
+
+          canvas.addEventListener("mousedown", jump);
+          canvas.addEventListener("touchstart", function (e) { e.preventDefault(); jump(); }, { passive: false });
+          document.addEventListener("keydown", onKey, true);
+
+          best = readBest();
+          reset();
+          loop();
+        }
+
+        function reset() {
+          frame = 0; deadFrame = 0; score = 0; speed = 6; spawnDist = 60; dead = false; running = true;
+          player = { x: 120, y: GROUND - 38, w: 24, h: 38, vy: 0, onGround: true };
+          obstacles = [];
+          hills = 0;
+          chaserX = 32; // Bigfoot lopes along behind the hiker
+        }
+
+        function closeGame() {
+          running = false;
+          cancelAnimationFrame(raf);
+          document.removeEventListener("keydown", onKey, true);
+          if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+          overlay = canvas = ctx = null;
+          open = false;
+        }
+
+        function onKey(e) {
+          var k = (e.key || "").toLowerCase();
+          if (k === "escape") { e.preventDefault(); closeGame(); return; }
+          if (k === " " || k === "spacebar" || k === "arrowup" || k === "up") { e.preventDefault(); jump(); }
+        }
+
+        function jump() {
+          if (dead) { reset(); return; }
+          if (!running) return;
+          if (player.onGround) { player.vy = -14.5; player.onGround = false; }
+        }
+
+        function gap() { return 210 + Math.random() * 150 + speed * 12; }
+
+        function spawn() {
+          var tree = Math.random() < 0.62;
+          if (tree) {
+            var th = 34 + Math.random() * 22;
+            obstacles.push({ x: W + 20, w: 16 + Math.random() * 8, h: th, type: "tree" });
+          } else {
+            obstacles.push({ x: W + 20, w: 28 + Math.random() * 14, h: 16 + Math.random() * 10, type: "rock" });
+          }
+        }
+
+        function hit(a, o) {
+          var ax = a.x + 3, aw = a.w - 6, ay = a.y + 2, ah = a.h - 2;
+          var oy = GROUND - o.h;
+          return ax < o.x + o.w && ax + aw > o.x && ay < GROUND && ay + ah > oy;
+        }
+
+        function update() {
+          frame++;
+          score += 0.15;
+          speed = Math.min(6 + score * 0.004, 13);
+
+          player.vy += 0.9;
+          player.y += player.vy;
+          if (player.y >= GROUND - player.h) { player.y = GROUND - player.h; player.vy = 0; player.onGround = true; }
+
+          spawnDist -= speed;
+          if (spawnDist <= 0) { spawn(); spawnDist = gap(); }
+
+          for (var i = obstacles.length - 1; i >= 0; i--) {
+            obstacles[i].x -= speed;
+            if (hit(player, obstacles[i])) { dead = true; running = false; deadFrame = 0; best = Math.max(best, Math.floor(score)); writeBest(best); }
+            if (obstacles[i].x + obstacles[i].w < -10) obstacles.splice(i, 1);
+          }
+          hills = (hills - speed * 0.25) % W;
+        }
+
+        function ridge(offset, amp, baseY, color) {
+          ctx.fillStyle = color;
+          ctx.beginPath();
+          ctx.moveTo(0, H);
+          for (var x = 0; x <= W; x += 30) {
+            var y = baseY + Math.sin((x + offset) * 0.012) * amp + Math.sin((x + offset) * 0.03) * (amp * 0.4);
+            ctx.lineTo(x, y);
+          }
+          ctx.lineTo(W, H); ctx.closePath(); ctx.fill();
+        }
+
+        function drawTree(x, base, h, w) {
+          ctx.fillStyle = "#10131f";
+          ctx.beginPath();
+          ctx.moveTo(x - w / 2, base);
+          ctx.lineTo(x, base - h * 0.55);
+          ctx.lineTo(x + w / 2, base);
+          ctx.closePath();
+          ctx.moveTo(x - w * 0.38, base - h * 0.32);
+          ctx.lineTo(x, base - h);
+          ctx.lineTo(x + w * 0.38, base - h * 0.32);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        function drawRock(x, base, h, w) {
+          ctx.fillStyle = "#10131f";
+          ctx.beginPath();
+          ctx.moveTo(x, base);
+          ctx.quadraticCurveTo(x, base - h, x + w / 2, base - h);
+          ctx.quadraticCurveTo(x + w, base - h, x + w, base);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        function drawPlayer() {
+          var px = player.x, py = player.y, w = player.w, h = player.h;
+          ctx.fillStyle = "#0d1120";
+          ctx.strokeStyle = "#0d1120";
+          ctx.lineWidth = 4; ctx.lineCap = "round";
+          // legs (kept relative to the body so they don't stretch mid-jump)
+          var hipY = py + h - 6, footLen = 8;
+          if (player.onGround) {
+            var sw = Math.sin(frame * 0.35) * 5;
+            leg(px + 7, hipY, px + 7 - sw, hipY + footLen);
+            leg(px + w - 7, hipY, px + w - 7 + sw, hipY + footLen);
+          } else {
+            // tucked legs for the jump
+            leg(px + 7, hipY, px + 4, hipY + footLen - 2);
+            leg(px + w - 7, hipY, px + w - 3, hipY + footLen - 2);
+          }
+          // backpack
+          rr(px - 5, py + 8, 8, 16, 3); ctx.fill();
+          // torso
+          rr(px, py + 6, w, h - 12, 6); ctx.fill();
+          // head
+          ctx.beginPath(); ctx.arc(px + w / 2, py + 3, 7, 0, Math.PI * 2); ctx.fill();
+        }
+        function leg(x1, y1, x2, y2) { ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); }
+        function rr(x, y, w, h, r) {
+          ctx.beginPath();
+          ctx.moveTo(x + r, y);
+          ctx.arcTo(x + w, y, x + w, y + h, r);
+          ctx.arcTo(x + w, y + h, x, y + h, r);
+          ctx.arcTo(x, y + h, x, y, r);
+          ctx.arcTo(x, y, x + w, y, r);
+          ctx.closePath();
+        }
+
+        function draw() {
+          // sky
+          var g = ctx.createLinearGradient(0, 0, 0, GROUND);
+          for (var i = 0; i < SKY.length; i++) g.addColorStop(SKY[i][0], SKY[i][1]);
+          ctx.fillStyle = g; ctx.fillRect(0, 0, W, GROUND);
+          // stars
+          ctx.fillStyle = "rgba(255,255,255,0.7)";
+          for (var j = 0; j < stars.length; j++) { ctx.globalAlpha = 0.3 + Math.abs(Math.sin(frame * 0.02 + j)) * 0.6; ctx.beginPath(); ctx.arc(stars[j].x, stars[j].y, stars[j].r, 0, 6.28); ctx.fill(); }
+          ctx.globalAlpha = 1;
+          // sun glow
+          var sg = ctx.createRadialGradient(700, 150, 8, 700, 150, 120);
+          sg.addColorStop(0, "rgba(255,240,210,0.9)"); sg.addColorStop(1, "rgba(255,200,120,0)");
+          ctx.fillStyle = sg; ctx.fillRect(560, 20, 300, 260);
+          // parallax ridges
+          ridge(hills * 0.5, 16, GROUND - 70, "#4a4770");
+          ridge(hills, 24, GROUND - 34, "#2c2c4c");
+          // ground
+          ctx.fillStyle = "#0d1120"; ctx.fillRect(0, GROUND, W, H - GROUND);
+          ctx.strokeStyle = "rgba(255,255,255,0.10)"; ctx.lineWidth = 2; ctx.beginPath();
+          for (var d = (frame * -speed) % 40; d < W; d += 40) { ctx.moveTo(d, GROUND + 10); ctx.lineTo(d + 18, GROUND + 10); }
+          ctx.stroke();
+          // obstacles
+          for (var o = 0; o < obstacles.length; o++) {
+            var ob = obstacles[o];
+            if (ob.type === "tree") drawTree(ob.x + ob.w / 2, GROUND, ob.h, ob.w + 14);
+            else drawRock(ob.x, GROUND, ob.h, ob.w);
+          }
+          drawChaser();
+          drawPlayer();
+          // score
+          ctx.fillStyle = "rgba(255,255,255,0.92)";
+          ctx.font = "600 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+          ctx.textAlign = "right";
+          ctx.fillText(String(Math.floor(score)).padStart(5, "0"), W - 18, 30);
+          ctx.fillStyle = "rgba(255,255,255,0.45)";
+          ctx.font = "500 12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+          ctx.fillText("best " + String(best).padStart(5, "0"), W - 18, 48);
+          // game over
+          if (dead) {
+            ctx.fillStyle = "rgba(10,12,20,0.55)"; ctx.fillRect(0, 0, W, GROUND);
+            ctx.textAlign = "center"; ctx.fillStyle = "#fff";
+            ctx.font = "700 30px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+            ctx.fillText("Off the trail", W / 2, GROUND / 2 - 6);
+            ctx.font = "500 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+            ctx.fillStyle = "rgba(255,255,255,0.8)";
+            ctx.fillText("space / tap to try again", W / 2, GROUND / 2 + 24);
+          }
+          ctx.textAlign = "left";
+        }
+
+        // ---- Bigfoot: an original silhouette, drawn as a static vector in a
+        //      100 x 124 design space (feet at ~y118). Side-profile walking pose
+        //      facing the hiker: rounded head blended into a hunched back, long
+        //      hanging arms, mid-stride legs, big feet. Clean silhouette. ----
+        function drawBigfoot(g) {
+          g.fillStyle = "#0d1120"; g.strokeStyle = "#0d1120";
+          g.lineJoin = "round"; g.lineCap = "round";
+          function cap(x1, y1, x2, y2, w) { g.lineWidth = w; g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2, y2); g.stroke(); }
+          // far arm (behind body) + hand
+          cap(42, 36, 32, 82, 15);
+          g.beginPath(); g.arc(32, 84, 8, 0, 7); g.fill();
+          // legs (static mid-stride) + feet
+          cap(42, 90, 24, 118, 18);
+          cap(58, 90, 70, 116, 18);
+          g.beginPath(); g.ellipse(22, 118, 13, 5, 0, 0, 7); g.fill();
+          g.beginPath(); g.ellipse(74, 117, 16, 5, 0, 0, 7); g.fill();
+          // torso + head as one continuous hump (no neck, no peak)
+          g.beginPath();
+          g.moveTo(30, 28);
+          g.quadraticCurveTo(14, 50, 20, 78);
+          g.quadraticCurveTo(24, 98, 46, 94);
+          g.quadraticCurveTo(74, 96, 79, 64);
+          g.quadraticCurveTo(83, 42, 76, 34);   // chest up to jaw
+          g.quadraticCurveTo(90, 32, 86, 20);   // brow juts forward
+          g.quadraticCurveTo(82, 7, 62, 7);     // rounded top of head
+          g.quadraticCurveTo(42, 7, 30, 28);    // over the shoulder hump
+          g.closePath(); g.fill();
+          // near arm (front) + hand
+          cap(70, 42, 74, 84, 16);
+          g.beginPath(); g.arc(74, 86, 8, 0, 7); g.fill();
+        }
+
+        function drawChaser() {
+          if (dead) {
+            var e = Math.min(deadFrame / 24, 1);
+            chaserX = 32 + (1 - Math.pow(1 - e, 3)) * (player.x - 26 - 32); // lunge in for the catch
+          }
+          if (bfImg.complete) {
+            var h = 78, w = 78;                 // 128x128 viewBox
+            ctx.save();
+            ctx.translate(chaserX, GROUND - h + 6);
+            ctx.scale(-1, 1);                   // flip horizontally to face the hiker
+            ctx.drawImage(bfImg, -w / 2, 0, w, h);
+            ctx.restore();
+          } else {
+            // fallback silhouette until the image loads
+            var s = 0.55;
+            ctx.save();
+            ctx.translate(chaserX - 50 * s, GROUND - 122 * s);
+            ctx.scale(s, s);
+            drawBigfoot(ctx);
+            ctx.restore();
+          }
+        }
+
+        function loop() {
+          if (running) update();
+          else if (dead) deadFrame++;
+          if (ctx) { draw(); raf = requestAnimationFrame(loop); }
+        }
+      })();
+    </script>
   </body>
 </html>
